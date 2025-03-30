@@ -4,6 +4,9 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './Pages/Home';
+import Stories from './Pages/Stories';
+import Gifts from './Pages/Gifts';
+import GiftCards from './Pages/GiftCards';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 let allRoutes = createBrowserRouter(
@@ -12,6 +15,19 @@ let allRoutes = createBrowserRouter(
     {
       path:'/',
       element:<Home></Home>
+    },
+    {
+      path:'stories',
+      element:<Stories></Stories>
+    },
+    {
+      path:'gifts',
+      element:<Gifts></Gifts>
+    },
+
+    {
+      path:'gifts/:id',
+      element:<GiftCards></GiftCards>
     },
   ]
 )

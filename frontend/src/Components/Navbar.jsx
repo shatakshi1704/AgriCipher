@@ -18,10 +18,10 @@ export default function Navbar() {
                             <Link to={'/'}>Home</Link>
                         </li>
                         <li className='nav-items'>
-                            <Link to={'/'}>Stories</Link>
+                            <Link to={'/stories'}>Stories</Link>
                         </li>
                         <li className='nav-items'>
-                        <Link to={'/'}>Gift</Link>
+                        <Link to={'/gifts'}>Gift</Link>
                         </li>
                         <li className='nav-items'>
                         <Link to={'/'}>Get Involved</Link>

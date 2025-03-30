@@ -19,12 +19,12 @@ export default function AutoSlider() {
         const interval = setInterval(() => {
             setIsTransitioning(true);
             setIndex((prevIndex) => (prevIndex + 1) % quotesData.length);
-        }, 2000);
+        }, 4000);
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <div className="relative w-full h-[500px] flex justify-center items-center overflow-hidden">
+        <div className="relative w-full h-[65rem] flex justify-center items-center overflow-hidden">
             <div className="w-full h-full flex"
                 style={{ transform: `translateX(-${index * 100}%)`, transition: isTransitioning ? "transform 1s ease-in-out" : "none" }}
                 onTransitionEnd={() => {
