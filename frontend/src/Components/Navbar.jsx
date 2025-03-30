@@ -18,13 +18,19 @@ export default function Navbar() {
                             <Link to={'/'}>Home</Link>
                         </li>
                         <li className='nav-items'>
-                            <Link to={'/about-us'}>About-Us</Link>
+                            <Link to={'/'}>Stories</Link>
                         </li>
                         <li className='nav-items'>
-                        <Link to={'/collection'}>Collection</Link>
+                        <Link to={'/'}>Gift</Link>
                         </li>
                         <li className='nav-items'>
-                            <Link to={'/contact'}>Contact-Us</Link>
+                        <Link to={'/'}>Get Involved</Link>
+                        </li>
+                        <li className='nav-items'>
+                        <Link to={'/'}>Support</Link>
+                        </li>
+                        <li className='nav-items'>
+                            <Link to={'/'}>Login / Register</Link>
                         </li>
                     </ul>
                 </nav>
