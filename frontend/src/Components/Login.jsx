@@ -30,7 +30,7 @@ export default function Login() {
               placeholder="Your Email"
               autoComplete="email"
               onChange={handleChange}
-              className="text-xl w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all"
+              className="text-xl w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black text-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all"
               required
             />
           </div>
@@ -42,7 +42,7 @@ export default function Login() {
               placeholder="Your Password"
               autoComplete="current-password"
               onChange={handleChange}
-              className="text-xl w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all"
+              className="text-xl w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black text-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all"
               required
             />
           </div>

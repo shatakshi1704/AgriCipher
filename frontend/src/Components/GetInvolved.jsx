@@ -31,7 +31,7 @@ export default function GetInvolved() {
       if (!response.ok) throw new Error(`Server responded with ${response.status}`);
 
       const data = await response.json();
-      setStatusMessage("✅ " + data.message);
+      setStatusMessage( data.message);
 
       setFormData({ name: "", email: "", organization: "", message: "" });
     } catch (error) {
@@ -61,7 +61,7 @@ export default function GetInvolved() {
               placeholder="Your Name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all"
+              className="w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black text-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all"
               required
             />
           </div>
@@ -73,7 +73,7 @@ export default function GetInvolved() {
               placeholder="Your Email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all"
+              className="w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black text-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all"
               required
             />
           </div>
@@ -85,7 +85,7 @@ export default function GetInvolved() {
               placeholder="Your Organization"
               value={formData.organization}
               onChange={handleChange}
-              className="w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all"
+              className="w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black text-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all"
             />
           </div>
           <div className="relative mb-6">
@@ -95,7 +95,7 @@ export default function GetInvolved() {
               placeholder="Your Message"
               value={formData.message}
               onChange={handleChange}
-              className="w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all h-32"
+              className="w-full p-3 pl-12 rounded-xl bg-[#e3ffcf] placeholder-black  text-black focus:outline-none focus:ring-2 focus:ring-[#e8872a] transition-all h-32"
             ></textarea>
           </div>
           <button
