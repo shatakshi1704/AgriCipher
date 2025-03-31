@@ -29,11 +29,11 @@ const cardData = [
 
 export default function Features() {
   return (
-    <div className="min-h-screen bg-green-50 py-10 px-5 md:px-20">
-        <h1 className="text-4xl md:text-5xl font-bold text-center text-green-700 mb-[3rem] mt-[5rem] ">
+    <div className="min-h-screen bg-[#e3ffcf] py-10 px-5 md:px-20">
+        <h1 className="text-4xl md:text-5xl font-bold text-center text-green-700 mb-[3rem] mt-[5rem]">
                 Intuitive Features
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[8rem]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[2rem]">
             {cardData.map((item) => (
                 <HoverCard key={item.id} item={item} />
             ))}
@@ -48,7 +48,7 @@ function HoverCard({ item }) {
 
   return (
     <div
-      className="bg-white rounded-[2rem] shadow-lg overflow-hidden relative h-[30rem] transform transition-transform duration-300 hover:scale-105"
+      className="bg-white rounded-[2rem] shadow-lg overflow-hidden relative h-[50rem] transform transition-transform duration-300 hover:scale-105"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -65,7 +65,7 @@ function HoverCard({ item }) {
         <p className="text-[1.2rem] font-[500] m-[0.3rem]">{item.description}</p>
         <a
           href={item.link}
-          className="mt-[1rem] inline-block bg-green-600 px-[0.5rem] py-[0.8rem] text-sm rounded-lg hover:bg-green-700 transition text-[1.5rem] font-[500]"
+          className="mt-[1rem] inline-block bg-[#51a644] px-[0.5rem] py-[0.5rem] rounded-lg hover:bg-green-700 transition text-[1.2rem] font-[500]"
         >
           Learn More
         </a>

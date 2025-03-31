@@ -55,13 +55,13 @@ export default function Reviews() {
 
       
   return (
-    <section className="min-h-screen bg-green-50 py-10 px-5 md:px-20">
-      <div className="max-w-6xl mx-auto px-5">
+    <section className=" bg-[#e3ffcf] py-10 px-5 md:px-20">
+      <div>
         <h2 className="text-4xl md:text-5xl font-bold text-center text-green-700 mb-[3rem] mt-[5rem]">
           🌱 Farmers' Impact Stories 🌾
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[3rem]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[2rem]">
           {impactReviews.map((review) => (
             <div key={review.id} className="p-5 bg-white rounded-[1.5rem] shadow-lg overflow-hidden">
               <div className="flex items-center space-x-4">
@@ -76,12 +76,12 @@ export default function Reviews() {
                 </div>
               </div>
 
-              <p className="mt-4 text-gray-700 text-[1.5rem] md:text-base font-[500]">
+              <p className="mt-4 text-gray-700 text-[1.5rem] font-[500]">
                 "{review.review}"
               </p>
 
               <div className="mt-3 flex items-center">
-                <span className="text-gray-600 text-sm ml-2">{review.rating} <span className="text-yellow-500 text-lg">⭐</span></span>
+                <span className="text-gray-600 text-[2rem] ml-2">{review.rating} <span className="text-yellow-500 text-[2rem]">⭐</span></span>
               </div>
             </div>
           ))}
