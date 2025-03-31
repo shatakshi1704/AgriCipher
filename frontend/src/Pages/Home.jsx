@@ -4,6 +4,7 @@ import Hero_Section from '../Components/Hero_Section'
 import Features from '../Components/Features'
 import Reviews from '../Components/Reviews'
 import Gift_Hero from '../Components/Gift_Hero'
+import Footer from './Footer'
 
 export default function Home() {
   return (
@@ -17,6 +18,8 @@ export default function Home() {
         <Reviews></Reviews>
 
         <Gift_Hero></Gift_Hero>
+
+        <Footer></Footer>
     </div>
   )
 }

@@ -1,41 +1,35 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import "../styles.css"
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import logo from "../images/lgoooo.png"
+
 
 export default function Navbar() {
+  const { user, logout } = useContext(AuthContext) || {};
+
   return (
-    <div>
-      <div className='navbar grid grid-two-cols bg-[#105d22] text-[#e3ffcf]'>
-            <div>
-            <a href='#'>
-                <Link to={'/'}>Website Logo</Link>
-            </a>
-            </div>
-            <div>
-                <nav>
-                    <ul className='flex gap-10 p-8 font-playfair'>
-                        <li className='nav-items'>
-                            <Link to={'/'}>Home</Link>
-                        </li>
-                        <li className='nav-items'>
-                            <Link to={'/stories'}>Stories</Link>
-                        </li>
-                        <li className='nav-items'>
-                        <Link to={'/gifts'}>Gift</Link>
-                        </li>
-                        <li className='nav-items'>
-                        <Link to={'/'}>Get Involved</Link>
-                        </li>
-                        <li className='nav-items'>
-                        <Link to={'/'}>Support</Link>
-                        </li>
-                        <li className='nav-items'>
-                            <Link to={'/'}>Login / Register</Link>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+    <div className="navbar bg-transparent text-black px-10 py-5 flex justify-between items-center absolute top-0 left-0 w-full z-50 h-[63px] ">
+      {/* Logo */}
+      <Link>
+  <img src={logo} className="h-[70px] w-[70px] rounded-full py-2" alt="Logo" />
+</Link>
+
+      
+      {/* Navigation Links */}
+      <nav>
+        <ul className="flex gap-10 text-lg font-medium">
+          <li><Link to="/" className="hover:text-lime-400 transition duration-300">Home</Link></li>
+          <li><Link to="/stories" className="hover:text-lime-400 transition duration-300">Stories</Link></li>
+          <li><Link to="/gifts" className="hover:text-lime-400 transition duration-300">Gift</Link></li>
+          <li><Link to="/get-involved" className="hover:text-lime-400 transition duration-300">Get Involved</Link></li>
+          <li><Link to="/support" className="hover:text-lime-400 transition duration-300">Support</Link></li>
+          {user ? (
+            <li onClick={logout} className="cursor-pointer text-red-400 hover:text-red-600 transition duration-300">Logout</li>
+          ) : (
+            <li><Link to="/login" className="hover:text-lime-400 transition duration-300">Login / Register</Link></li>
+          )}
+        </ul>
+      </nav>
     </div>
-  )
+  );
 }

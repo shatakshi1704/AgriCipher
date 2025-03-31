@@ -3,41 +3,37 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AuthProvider } from "./context/AuthContext"; // ✅ AuthContext wrapper added
+import PrivateRoute from "./Components/privaterouter"; // ✅ Ensure this file exists and is correctly implemented
+import Login from "./Components/Login";
+import Register from "./Components/Register";
 import Home from './Pages/Home';
 import Stories from './Pages/Stories';
 import Gifts from './Pages/Gifts';
 import GiftCards from './Pages/GiftCards';
+import Support from './Components/Support';
+import GetInvolved from './Components/GetInvolved';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-let allRoutes = createBrowserRouter(
-  [
-    // static routing
-    {
-      path:'/',
-      element:<Home></Home>
-    },
-    {
-      path:'stories',
-      element:<Stories></Stories>
-    },
-    {
-      path:'gifts',
-      element:<Gifts></Gifts>
-    },
 
-    {
-      path:'gifts/:id',
-      element:<GiftCards></GiftCards>
-    },
-  ]
-)
+// ✅ Define all routes with AuthProvider wrapping them
+const allRoutes = createBrowserRouter([
+  { path: '/', element: <Home /> },
+  { path: 'stories', element: <Stories /> },
+  { path: 'gifts', element: <Gifts /> },
+  { path: 'gifts/:id', element: <GiftCards /> },
+  { path: 'login', element: <Login /> },
+  { path: 'register', element: <Register /> },
+  { path: 'support', element: <Support /> },
+  { path: 'get-involved', element: <GetInvolved /> },
+]);
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={allRoutes}></RouterProvider>
+    <AuthProvider>  {/* ✅ Now all components have access to AuthContext */}
+      <RouterProvider router={allRoutes} />
+    </AuthProvider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
