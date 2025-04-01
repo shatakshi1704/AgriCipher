@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 // import {giftsInfo} from "./GiftCards/giftsInfo"
 // import giftsInfo from './GiftCards/giftsInfo';
+import Navbar from "../Components/Navbar";
 import { useLocation } from 'react-router-dom';
 import one from "../images/aloevera.jpg";
 import two from "../images/basil.png"
@@ -237,8 +238,11 @@ export default function Cart() {
     
   
     return (
+      <div>
+        <Navbar></Navbar>
+      
       <div className="bg-gray-50 min-h-screen p-6">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+        <h1 className="text-5xl font-bold text-center text-gray-800 mb-8 mt-[8rem]">
           Your Cart
         </h1>
   
@@ -280,6 +284,7 @@ export default function Cart() {
             <p>₹{(totalPrice + totalPrice * 0.05).toFixed(2)}</p>
           </div>
         </div>
+      </div>
       </div>
     );
   }

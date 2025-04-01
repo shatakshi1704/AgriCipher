@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../context/AuthContext"; // Import AuthContext
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import back from "../images/baakibackground.png"
+import back from "../images/baakibackground.png"; // Add your background image
 
 export default function Login() {
-  const { login } = useContext(AuthContext);
+  const { login, loading, error } = useContext(AuthContext); // Destructure login, loading, and error from context
   const [user, setUser] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
@@ -13,12 +13,11 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(user.email, user.password);
+    await login(user.email, user.password); // Use the login function from context
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-[#e3ffcf]"
-    style={{ backgroundImage: `url(${back})` }}>
+    <div className="min-h-screen flex justify-center items-center bg-[#e3ffcf]" style={{ backgroundImage: `url(${back})` }}>
       <div className="bg-[#004b23] p-10 rounded-3xl shadow-2xl text-white w-[400px] h-auto transform transition-all duration-300 hover:scale-105 hover:shadow-3xl">
         <h2 className="text-4xl font-bold text-center mb-6">Welcome Back!</h2>
         <form onSubmit={handleSubmit}>
@@ -49,12 +48,14 @@ export default function Login() {
           <button
             type="submit"
             className="w-full bg-[#e8872a] p-3 rounded-xl text-white font-bold text-2xl hover:bg-[#d0761e] hover:shadow-lg transform transition-all duration-300 hover:scale-105"
+            disabled={loading} // Disable button when loading
           >
-            Login
+            {loading ? "Loading..." : "Login"} {/* Show loading text */}
           </button>
         </form>
+        {error && <p className="text-red-500 text-center mt-4">{error}</p>} {/* Display error if any */}
         <p className="text-center mt-4 text-xl">
-          New here? <a href="/register" className="text-[#e8872a] font-bold ">Register now</a>
+          New here? <a href="/register" className="text-[#e8872a] font-bold">Register now</a>
         </p>
       </div>
     </div>
