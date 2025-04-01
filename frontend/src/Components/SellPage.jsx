@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import back from "../images/background.png";
 
 export default function Sell() {
   const [formData, setFormData] = useState({
@@ -26,31 +27,22 @@ export default function Sell() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataToSend = new FormData();
-    for (const key in formData) {
+    Object.keys(formData).forEach((key) => {
       formDataToSend.append(key, formData[key]);
-    }
+    });
 
     try {
-      const response = await fetch("/api/sell", {
+      const response = await fetch("http://localhost:5001/api/sell", {
         method: "POST",
         body: formDataToSend,
       });
 
+      const responseData = await response.json();
       if (response.ok) {
-        alert("Crop listed successfully!");
-        setFormData({
-          cropName: "",
-          quantity: "",
-          price: "",
-          location: "",
-          contact: "",
-          image: null,
-          quality: "",
-          harvestDate: "",
-        });
+        alert(responseData.message);
         navigate("/buy");
       } else {
-        alert("Failed to list crop.");
+        alert(responseData.error || "Failed to list crop.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -59,48 +51,46 @@ export default function Sell() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
-        <h2 className="text-3xl font-bold text-center text-green-700 mb-6">Sell Your Crop</h2>
-        <form onSubmit={handleSubmit} className="space-y-5">
+    <div
+      className="min-h-screen flex items-center justify-center p-6 bg-cover bg-center"
+      style={{ backgroundImage: `url(${back})` }}
+    >
+      <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-3xl transform transition duration-300 hover:scale-105">
+        <h2 className="text-4xl font-bold text-center text-green-700 mb-8 drop-shadow-lg">
+          Sell Your Crop
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
           {[
-            { placeholder: "Crop Name", name: "cropName", type: "text" },
-            { placeholder: "Quantity (kg/ton)", name: "quantity", type: "number" },
-            { placeholder: "Price per kg (₹)", name: "price", type: "number" },
-            { placeholder: "Location", name: "location", type: "text" },
-            { placeholder: "Crop Quality", name: "quality", type: "text" },
-            { placeholder: "Harvest Date", name: "harvestDate", type: "date" },
-            { placeholder: "Contact Number", name: "contact", type: "text" },
-          ].map(({ placeholder, name, type }) => (
-            <div key={name} className="relative">
-              <input
-                type={type}
-                name={name}
-                value={formData[name]}
-                onChange={handleChange}
-                required
-                className="w-full p-3 border rounded-lg focus:border-green-500 focus:ring focus:ring-green-200"
-                placeholder={placeholder}
-              />
-            </div>
-          ))}
-
-          {/* Image Upload */}
-          <div>
-            <label className="block mb-2 text-gray-600">Crop Image</label>
+            "cropName",
+            "quantity",
+            "price",
+            "location",
+            "quality",
+            "harvestDate",
+            "contact",
+          ].map((name) => (
             <input
-              type="file"
-              name="image"
-              accept="image/*"
+              key={name}
+              type={name === "harvestDate" ? "date" : "text"}
+              name={name}
+              value={formData[name]}
               onChange={handleChange}
-              className="w-full p-3 border rounded-lg focus:border-green-500 focus:ring focus:ring-green-200"
+              required
+              className="w-full p-4 border border-gray-300 rounded-xl shadow-md text-lg bg-gray-50 focus:ring-4 focus:ring-green-300 transition"
+              placeholder={name.replace(/([A-Z])/g, " $1").trim()}
             />
-          </div>
-
-          {/* Submit Button */}
+          ))}
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleChange}
+            required
+            className="w-full p-4 border border-gray-300 rounded-xl shadow-md text-lg bg-gray-50 focus:ring-4 focus:ring-green-300 transition"
+          />
           <button
             type="submit"
-            className="w-full p-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all"
+            className="w-full p-4 bg-gradient-to-r from-[#51a644] to-[#2e7d32] text-white font-semibold rounded-xl shadow-lg text-xl hover:bg-green-700 transition transform hover:scale-105"
           >
             List Crop
           </button>

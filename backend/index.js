@@ -1,26 +1,11 @@
-<<<<<<< HEAD
-// const express = require("express");
-// const mongoose = require("mongoose");
-// const cors = require("cors");
-// const dotenv = require("dotenv");
-// import authRoutes from "./routes/authRoutes.js"; // Ensure path is correct
-
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import multer from "multer";
+import path from "path";
+import fs from "fs";
 import dotenv from "dotenv";
-import authRoutes from "./routes/authRoutes.js";
 
-=======
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const path = require("path");
-const multer = require("multer");
-
-// Load environment variables
->>>>>>> 147d45fa05f5c0ec29e8685ce7ae83da48964161
 dotenv.config();
 
 const app = express();
@@ -28,130 +13,98 @@ const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use("/auth", authRoutes);
+app.use(express.json()); // Ensure JSON parsing is enabled
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
+app.use("/uploads", express.static("uploads"));
 
-// MongoDB Connection (Only once)
-mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("✅ Connected to MongoDB"))
-  .catch((error) => console.error("❌ MongoDB Connection Error:", error));
+// MongoDB Connection
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
-// 📌 Crop Schema & Model for Selling Crops
+// Define Crop Schema
 const cropSchema = new mongoose.Schema({
-  cropName: { type: String, required: true },
-  quantity: { type: Number, required: true },
-  price: { type: Number, required: true },
-  location: { type: String, required: true },
-  contact: { type: String, required: true },
-  image: { type: String }, // To store the image URL
-  quality: { type: String, required: true },
-  harvestDate: { type: Date, required: true },
+  cropName: String,
+  quantity: Number,
+  price: Number,
+  location: String,
+  contact: String,
+  image: String,
+  quality: String,
+  harvestDate: Date,
 });
 
-const Crop = mongoose.model("Crop", cropSchema, "formdata"); // Sell data stored in 'formdata'
+const Crop = mongoose.model("Crop", cropSchema);
 
-// 📌 New Schema & Model for Buy Page Crops (Different Collection)
-const buyCropSchema = new mongoose.Schema({
-  cropName: { type: String, required: true },
-  quantity: { type: Number, required: true },
-  price: { type: Number, required: true },
-  location: { type: String, required: true },
-  contact: { type: String, required: true },
-});
-
-const BuyCrop = mongoose.model("BuyCrop", buyCropSchema, "buydata"); // Buy data stored in 'buydata'
-
-// 📌 File upload configuration for images
+// Multer Setup for Image Uploads
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, "images");
-    // Ensure the images directory exists
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir);
-    }
-    cb(null, uploadDir);
-  },
+  destination: "uploads/",
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
-
 const upload = multer({ storage });
 
-// 📌 API Route to add a new crop (Sell crop)
-app.post("/api/sell", upload.single("image"), async (req, res) => {
-  const { cropName, quantity, price, location, contact, quality, harvestDate } = req.body;
-  const image = req.file ? "/images/" + req.file.filename : null;
-
-  const newCrop = new Crop({
-    cropName,
-    quantity,
-    price,
-    location,
-    contact,
-    image,
-    quality,
-    harvestDate,
-  });
-
-  try {
-    await newCrop.save();
-    res.status(200).json({ message: "✅ Crop listed successfully!" });
-  } catch (err) {
-    res.status(500).json({ message: "❌ Failed to list crop.", error: err });
-  }
-});
-
-// 📌 API Route to fetch crops for Buy Page (from 'formdata' collection)
+// Route to fetch all crops
 app.get("/api/crops", async (req, res) => {
   try {
     const crops = await Crop.find();
-    res.status(200).json(crops); // This is the actual fetch route for crops to be bought
+    res.json(crops);
   } catch (error) {
-    res.status(500).json({ message: "❌ Failed to fetch crops", error });
+    console.error("Error fetching crops:", error);
+    res.status(500).json({ error: "Error fetching crops" });
   }
 });
 
-// 📌 API Route to add crops for Buy Page (Stores in 'buydata' collection)
+// Route to list a new crop (Sell)
+app.post("/api/sell", upload.single("image"), async (req, res) => {
+  try {
+    console.log("Received form data:", req.body); // Debugging
+
+    const { cropName, quantity, price, location, contact, quality, harvestDate } = req.body;
+    if (!cropName || !quantity || !price || !location || !contact) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    const imagePath = req.file ? `/uploads/${req.file.filename}` : "";
+
+    const newCrop = new Crop({ cropName, quantity, price, location, contact, image: imagePath, quality, harvestDate });
+    await newCrop.save();
+    
+    console.log("Crop listed successfully:", newCrop);
+    res.json({ message: "Crop listed successfully!" });
+  } catch (error) {
+    console.error("Error listing crop:", error);
+    res.status(500).json({ error: "Error listing crop" });
+  }
+});
+
+// Route to handle buying a crop
 app.post("/api/buy", async (req, res) => {
-  const { cropName, quantity, price, location, contact } = req.body;
-
-  const newBuyCrop = new BuyCrop({
-    cropName,
-    quantity,
-    price,
-    location,
-    contact,
-  });
-
   try {
-    await newBuyCrop.save();
-    res.status(201).json({ message: "✅ Crop added for buying!" });
+    const { cropName, quantity } = req.body;
+    const crop = await Crop.findOne({ cropName });
+
+    if (!crop || crop.quantity < quantity) {
+      return res.status(400).json({ message: "Insufficient stock or crop unavailable." });
+    }
+
+    crop.quantity -= quantity;
+    if (crop.quantity === 0) {
+      await Crop.deleteOne({ _id: crop._id });
+    } else {
+      await crop.save();
+    }
+
+    res.json({ message: "Crop purchased successfully!" });
   } catch (error) {
-    res.status(500).json({ message: "❌ Failed to add crop for buying.", error });
-  }
-});
-
-// 📌 Form Submission Route (Get Involved Form)
-const formSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  organization: String,
-  message: String,
-});
-
-const FormSubmission = mongoose.model("FormSubmission", formSchema);
-
-app.post("/submit-form", async (req, res) => {
-  try {
-    const newSubmission = new FormSubmission(req.body);
-    await newSubmission.save();
-    res.status(200).json({ message: "✅ Form submitted successfully!" });
-  } catch (error) {
-    res.status(500).json({ message: "❌ Submission failed", error });
+    console.error("Error processing purchase:", error);
+    res.status(500).json({ error: "Error processing purchase" });
   }
 });
 
 // Start Server
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

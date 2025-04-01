@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from 'react'
-// import {giftsInfo} from "./GiftCards/giftsInfo"
-// import giftsInfo from './GiftCards/giftsInfo';
+import React, { useEffect, useState } from 'react';
 import Navbar from "../Components/Navbar";
-import { useLocation } from 'react-router-dom';
+import Remove from '../Components/Remove';  // Ensure the Remove component is correctly imported
 import one from "../images/aloevera.jpg";
-import two from "../images/basil.png"
+import two from "../images/basil.png";
 import back from "../images/baakibackground.png";
-import three from "../images/tulsii.webp"
-import four from "../images/money.png"
-import five from "../images/snake.jpg"
-import six from "../images/jade.webp"
-import seven from "../images/oeace.webp"
-import eight from "../images/areca.webp"
-import nine from "../images/lucky.webp"
-import ten from "../images/spider.jpg"
-import eleven from "../images/ficusss.webp"
-import twelve from "../images/lavender.webp"
-import thirteen from "../images/rubbber.webp"
-import fourteen from "../images/fern.jpg"
-import fifteen from "../images/cactus.avif"
-import sixteen from "../images/orchidd.avif"
-import seventeen from "../images/chrysan.webp"
-import eighteen from "../images/rosee.webp"
-import Remove from '../Components/Remove';
-
-
+import three from "../images/tulsii.webp";
+import four from "../images/money.png";
+import five from "../images/snake.jpg";
+import six from "../images/jade.webp";
+import seven from "../images/oeace.webp";
+import eight from "../images/areca.webp";
+import nine from "../images/lucky.webp";
+import ten from "../images/spider.jpg";
+import eleven from "../images/ficusss.webp";
+import twelve from "../images/lavender.webp";
+import thirteen from "../images/rubbber.webp";
+import fourteen from "../images/fern.jpg";
+import fifteen from "../images/cactus.avif";
+import sixteen from "../images/orchidd.avif";
+import seventeen from "../images/chrysan.webp";
+import eighteen from "../images/rosee.webp";
 
 export default function Cart() {
 
@@ -104,7 +99,7 @@ export default function Cart() {
     {
         id: 9,
         gift_name: "Lucky Bamboo",
-        image:nine,
+        image: nine,
         benefits: "Symbol of good fortune, requires minimal care.",
         care: "Keep roots in water, indirect light.",
         ideal_conditions: "Indoor, moderate humidity.",
@@ -209,43 +204,46 @@ export default function Cart() {
         ideal_conditions: "Outdoor, fertile soil.",
         price: 249
     }
-];
+  ];
 
-    const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
-    useEffect(() => {
-        let storedCart = localStorage.getItem("addToCart");
-        setCartItems(storedCart ? JSON.parse(storedCart) : []);
-    }, []);
+  useEffect(() => {
+    let storedCart = localStorage.getItem("addToCart");
+    setCartItems(storedCart ? JSON.parse(storedCart) : []);
+  }, []);
 
-    let filterProducts = cartItems.filter((v) => 
-      giftsInfo.some((curElem) => {
-            if(curElem.id === v.id){
-                return v
-            }})
-    );
+  let filterProducts = cartItems.filter((v) => 
+    giftsInfo.some((curElem) => {
+        if(curElem.id === v.id){
+            return v;
+        }
+    })
+  );
 
-    let totalPrice = filterProducts.reduce((accum, v) => {
-        return accum + v.price;
-    }, 0)
+  let totalPrice = filterProducts.reduce((accum, v) => {
+    return accum + v.price;
+  }, 0);
 
+  let handleRemove = (id) => {
+    Remove(id, setCartItems);
+  };
 
+  // Handle "Shop" button click to clear the cart
+  let handleShop = () => {
+    localStorage.removeItem("addToCart");  // Clear cart in localStorage
+    setCartItems([]);  // Reset state to an empty array
+  };
+
+  return (
+    <div>
+      <Navbar />
     
-
-    let handleRemove = (id) => {
-        Remove(id, setCartItems)
-    }
-    
-  
-    return (
-      <div>
-        <Navbar></Navbar>
-      
       <div className="bg-gray-50 min-h-screen p-6">
         <h1 className="text-5xl font-bold text-center text-gray-800 mb-8 mt-[8rem]">
           Your Cart
         </h1>
-  
+
         <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-5 gap-[2rem]">
           {filterProducts.map((prod, i) => (
             <div key={i} className="bg-white shadow-lg rounded-lg overflow-hidden">
@@ -268,7 +266,7 @@ export default function Cart() {
             </div>
           ))}
         </div>
-  
+
         <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
           <p className="text-xl font-semibold text-gray-800">Summary</p>
           <div className="mt-4 flex justify-between text-gray-700">
@@ -283,8 +281,16 @@ export default function Cart() {
             <p>Total Price</p>
             <p>₹{(totalPrice + totalPrice * 0.05).toFixed(2)}</p>
           </div>
+          
+          {/* Add Shop button */}
+          <button
+            className="mt-6 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            onClick={handleShop}
+          >
+            Shop Now
+          </button>
         </div>
       </div>
-      </div>
-    );
-  }
+    </div>
+  );
+}

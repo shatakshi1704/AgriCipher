@@ -20,7 +20,7 @@ const cardData = [
     title: "AI-POWERED SMART IRRIGATION & FERTILIZATION",
     description: "AI optimizes water usage based on weather data, soil moisture, and crop requirements to boost yields and reduce waste.",
     image: two,
-    link: "/smart-irrigation"
+    link: "https://smart-irrigation-and-fertilizer-reccomendation-x89nhwrtfhilxjp.streamlit.app/"
   },
   {
     id: 3,
