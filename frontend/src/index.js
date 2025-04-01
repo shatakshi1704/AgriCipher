@@ -13,6 +13,8 @@ import Gifts from './Pages/Gifts';
 import GiftCards from './Pages/GiftCards';
 import Support from './Components/Support';
 import GetInvolved from './Components/GetInvolved';
+import Cart from './Pages/Cart';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -26,6 +28,7 @@ const allRoutes = createBrowserRouter([
   { path: 'register', element: <Register /> },
   { path: 'support', element: <Support /> },
   { path: 'get-involved', element: <GetInvolved /> },
+  {path:'cart', element:<Cart></Cart>},
 ]);
 
 root.render(

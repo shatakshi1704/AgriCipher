@@ -19,6 +19,7 @@ import fifteen from "../images/cactus.avif"
 import sixteen from "../images/orchidd.avif"
 import seventeen from "../images/chrysan.webp"
 import eighteen from "../images/rosee.webp"
+import AddToCart from '../Components/AddToCart';
 
 
 export default function GiftCards() {
@@ -223,7 +224,7 @@ export default function GiftCards() {
                 <p className="text-gray-900 text-[1.6rem] m-[1rem]"><strong>Care:</strong> {details.care}</p>
                 <p className="text-gray-900 text-[1.6rem] m-[1rem]"><strong>Ideal Conditions:</strong> {details.ideal_conditions}</p>
                 <p className="text-gray-900 text-[1.6rem] m-[1rem]"><strong>Price:</strong> ₹{details.price}</p>
-                <button className="bg-gradient-to-r from-[#51a644] to-[#2e7d32] text-white px-6 py-2 rounded-lg hover:bg-green-700 transition text-[1.6rem] m-[1rem]">
+                <button onClick={() => {AddToCart(details)}} className="bg-gradient-to-r from-[#51a644] to-[#2e7d32] text-white px-6 py-2 rounded-lg hover:bg-green-700 transition text-[1.6rem] m-[1rem]">
                     Gift Now 
                 </button>
             </div>

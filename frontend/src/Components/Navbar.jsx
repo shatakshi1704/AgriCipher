@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import logo from "../images/lgoooo.png"
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Navbar() {
@@ -28,6 +30,10 @@ export default function Navbar() {
           ) : (
             <li><Link to="/login" className="hover:text-lime-400 transition duration-300">Login / Register</Link></li>
           )}
+
+          <li className="hover:text-lime-400 transition duration-300">
+                <Link to={"/cart"}> <FontAwesomeIcon icon={faCartShopping} /> </Link>
+          </li>
         </ul>
       </nav>
     </div>
