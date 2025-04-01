@@ -1,9 +1,14 @@
 import express from "express";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import User from "../models/user.js";
 
+
+dotenv.config();
 
 const router = express.Router();
+
 
 // REGISTER USER
 router.post("/register", async (req, res) => {
@@ -14,8 +19,11 @@ router.post("/register", async (req, res) => {
     let user = await User.findOne({ email });
     if (user) return res.status(400).json({ message: "User already exists" });
 
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
     // Create new user
-    user = new User({ name, email, password });
+    user = new User({ name, email, password: hashedPassword });
     await user.save();
 
     // Generate JWT token
