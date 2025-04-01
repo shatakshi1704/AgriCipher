@@ -13,7 +13,7 @@ const cardData = [
     title: "AI-DRIVEN CROP HEALTH MONITORING",
     description: "AI scans crops for diseases, pests, and nutrient deficiencies, giving farmers insights to address issues before major damage occurs.",
     image: one,
-    link: "/ai-crop-monitoring"
+    link: "https://pest-and-disease-detection-wg3phtpsf7kfc2senafbps.streamlit.app/"
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ export default function Features() {
   }, []);
 
   return (
-    <div 
+    <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat py-10 px-5 md:px-20 flex flex-col justify-center items-center"
       style={{ backgroundImage: `url(${back})` }}
     >

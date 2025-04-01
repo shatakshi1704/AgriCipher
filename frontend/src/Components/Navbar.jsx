@@ -25,16 +25,6 @@ export default function Navbar() {
           <li><Link to="/gifts" className="hover:text-lime-400 transition duration-300">Gift</Link></li>
           <li><Link to="/get-involved" className="hover:text-lime-400 transition duration-300">Get Involved</Link></li>
           <li><Link to="/support" className="hover:text-lime-400 transition duration-300">Support</Link></li>
-<<<<<<< HEAD
-          {/* {user ? (
-            <li onClick={logout} className="cursor-pointer text-red-400 hover:text-red-600 transition duration-300">Logout</li>
-          ) : (
-            <li><Link to="/login" className="hover:text-lime-400 transition duration-300">Login / Register</Link></li>
-          )} */}
-=======
-         
->>>>>>> 147d45fa05f5c0ec29e8685ce7ae83da48964161
-
           <li className="hover:text-lime-400 transition duration-300">
                 <Link to={"/cart"}> <FontAwesomeIcon icon={faCartShopping} /> </Link>
           </li>
