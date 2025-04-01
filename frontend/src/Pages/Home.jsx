@@ -7,6 +7,10 @@ import Gift_Hero from '../Components/Gift_Hero'
 import Footer from './Footer'
 
 export default function Home() {
+  if (!localStorage.getItem("addToCart")){
+    localStorage.setItem("addToCart", []);
+  }
+  
   return (
     <div bg-green-50>
         <Navbar></Navbar>

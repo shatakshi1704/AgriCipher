@@ -10,10 +10,10 @@ export default function Navbar() {
   const { user, logout } = useContext(AuthContext) || {};
 
   return (
-    <div className="navbar bg-transparent text-black px-10 py-5 flex justify-between items-center absolute top-0 left-0 w-full z-50 h-[63px] ">
+    <div className="fixed navbar bg-gradient-to-r from-[#212721] via-[#31433e] to-[#0c1403] text-white px-10 py-5 flex justify-between items-center top-0 left-0 w-full z-50 h-[50px] ">
       {/* Logo */}
       <Link>
-  <img src={logo} className="h-[70px] w-[70px] rounded-full py-2" alt="Logo" />
+  <img src={logo} className="h-[45px] w-[45px] rounded-full py-1" alt="Logo" />
 </Link>
 
       
