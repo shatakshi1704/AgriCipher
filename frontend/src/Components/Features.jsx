@@ -24,7 +24,7 @@ const cardData = [
   },
   {
     id: 3,
-    title: "AI-BASED MARKET INTELLIGENCE",
+    title: "SMART MARKETPLACE",
     description: "AI analyzes market trends and connects farmers directly with buyers, ensuring they sell at the right time for the best price.",
     image: three,
     link: "/buy-sell"

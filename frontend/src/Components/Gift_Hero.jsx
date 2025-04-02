@@ -24,7 +24,6 @@ export default function GiftSection() {
         className="grid grid-cols-1 lg:grid-cols-2 gap-10 rounded-[2rem] items-center bg-white mx-[2rem] md:mx-[5rem] p-8 shadow-lg hover:shadow-2xl transition-all ease-in-out duration-500 transform hover:scale-105"
         data-aos="fade-up"
       >
-        {/* Image Section */}
         <div className="w-full md:w-[90%] mx-auto transform hover:scale-105 transition-transform duration-300 ease-out">
           <img
             src={plant}
@@ -33,7 +32,6 @@ export default function GiftSection() {
           />
         </div>
 
-        {/* Content Section */}
         <div className="space-y-8 md:space-y-10">
         <h1 className="lg:text-[50px] leading-tight font-extrabold md:text-[35px] sm:text-[30px] text-[25px]">
          

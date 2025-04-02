@@ -17,7 +17,6 @@ export default function Navbar() {
 </Link>
 
       
-      {/* Navigation Links */}
       <nav>
         <ul className="flex gap-10 text-lg font-medium">
           <li><Link to="/" className="hover:text-lime-400 transition duration-300">Home</Link></li>

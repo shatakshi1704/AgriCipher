@@ -8,7 +8,7 @@ export default function Hero() {
       backgroundImage: `url(${main})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
-      height: "100vh", // Adjust as needed
+      height: "100vh", 
       width: "100%",
     }}
     >

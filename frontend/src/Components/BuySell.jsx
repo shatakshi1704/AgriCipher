@@ -8,7 +8,6 @@ export default function BuySell() {
       <h1 className="text-5xl font-extrabold text-white mb-6 text-center">Welcome to the Marketplace</h1>
       <p className="text-lg text-white mb-8 text-center">Choose an option below to get started:</p>
       <div className="flex gap-10">
-        {/* Sell Crops Card */}
         <Link to="/sell" className="card hover:scale-105 hover:shadow-2xl transition-transform duration-300">
           <div className="bg-white shadow-md rounded-lg p-6 text-center border border-[#004b23] transform transition-all hover:scale-105 w-[350px] h-[400px]">
             <img src={farmer} alt="Sell Crops" className="w-40 h-40 mx-auto w-[330px] h-[330px] transition-transform duration-300" />
@@ -17,7 +16,6 @@ export default function BuySell() {
           </div>
         </Link>
 
-        {/* Buy Crops Card */}
         <Link to="/buy" className="card hover:scale-105 hover:shadow-2xl transition-transform duration-300">
           <div className="bg-white shadow-md rounded-lg p-6 text-center border border-[#004b23] transform transition-all w-[350px] h-[400px] hover:scale-105">
             <img src={buyer} alt="Buy Crops" className="w-40 h-40 mx-auto w-[330px] h-[330px] transition-transform duration-300" />

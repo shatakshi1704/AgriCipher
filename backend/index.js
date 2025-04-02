@@ -11,13 +11,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Middleware
 app.use(cors());
-app.use(express.json()); // Ensure JSON parsing is enabled
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 app.use("/uploads", express.static("uploads"));
 
-// MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -25,7 +23,6 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// Define Crop Schema
 const cropSchema = new mongoose.Schema({
   cropName: String,
   quantity: Number,
@@ -39,7 +36,6 @@ const cropSchema = new mongoose.Schema({
 
 const Crop = mongoose.model("Crop", cropSchema);
 
-// Multer Setup for Image Uploads
 const storage = multer.diskStorage({
   destination: "uploads/",
   filename: (req, file, cb) => {
@@ -48,7 +44,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Route to fetch all crops
 app.get("/api/crops", async (req, res) => {
   try {
     const crops = await Crop.find();
@@ -59,7 +54,6 @@ app.get("/api/crops", async (req, res) => {
   }
 });
 
-// Route to list a new crop (Sell)
 app.post("/api/sell", upload.single("image"), async (req, res) => {
   try {
     console.log("Received form data:", req.body); // Debugging
@@ -82,7 +76,6 @@ app.post("/api/sell", upload.single("image"), async (req, res) => {
   }
 });
 
-// Route to handle buying a crop
 app.post("/api/buy", async (req, res) => {
   try {
     const { cropName, quantity } = req.body;
@@ -106,5 +99,4 @@ app.post("/api/buy", async (req, res) => {
   }
 });
 
-// Start Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

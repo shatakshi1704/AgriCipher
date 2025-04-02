@@ -2,7 +2,6 @@ const express = require("express");
 const Crop = require("../models/Crop");
 const router = express.Router();
 
-// 📢 Sell Crop (Save to DB)
 router.post("/sell", async (req, res) => {
   try {
     const newCrop = new Crop(req.body);
@@ -13,7 +12,6 @@ router.post("/sell", async (req, res) => {
   }
 });
 
-// 🛒 Fetch Crops (Buy Page)
 router.get("/buy", async (req, res) => {
   try {
     const crops = await Crop.find();

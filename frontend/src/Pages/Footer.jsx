@@ -8,7 +8,6 @@ export default function Footer() {
       <div className="container mx-auto px-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
 
-          {/* Branding & Mission */}
           <div>
           <img src={logo} className="h-[90px] w-[90px] rounded-full " alt="Logo" />
             <p className="text-2xl mt-6 max-w-lg leading-relaxed">
@@ -16,7 +15,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h3 className="text-4xl font-bold mb-6 text-[#fff]">Quick Links</h3>
             <ul className="text-2xl space-y-4">
@@ -27,7 +25,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact & Social Media */}
           <div>
             <h3 className="text-4xl font-bold mb-6 text-[#fff]">Contact Us</h3>
             <p className="text-2xl flex items-center gap-3">
@@ -37,7 +34,6 @@ export default function Footer() {
               <FaPhone /> +91 98765 43210
             </p>
 
-            {/* Social Links */}
             <div className="flex gap-8 mt-8 text-5xl text-[#fff]">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <FaFacebookF className="hover:text-[#e8872a] transition duration-300" />
@@ -56,7 +52,6 @@ export default function Footer() {
 
         </div>
 
-        {/* Copyright Section */}
         <div className="text-center text-2xl mt-12 border-t border-[#fff] pt-8 text-[#fff]">
           © {new Date().getFullYear()} <span className="font-semibold">AgriCipher</span>. All Rights Reserved.
         </div>

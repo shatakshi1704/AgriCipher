@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from "../Components/Navbar";
-import Remove from '../Components/Remove';  // Ensure the Remove component is correctly imported
+import Remove from '../Components/Remove';  
 import one from "../images/aloevera.jpg";
 import two from "../images/basil.png";
 import back from "../images/baakibackground.png";
@@ -244,9 +244,9 @@ export default function Cart() {
           Your Cart
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-5 gap-[2rem]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2rem]">
           {filterProducts.map((prod, i) => (
-            <div key={i} className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div key={i} className="bg-white shadow-lg rounded-lg cover overflow-hidden">
               <img
                 src={prod.image}
                 alt={prod.gift_name}

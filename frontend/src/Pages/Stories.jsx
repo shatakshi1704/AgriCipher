@@ -75,7 +75,7 @@ export default function Stories() {
                             <motion.img
                                 src={story.image}
                                 alt={story.farmer_name}
-                                className="w-full h-85"  // Ensures same size for all images
+                                className="w-full h-85"  
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 1 }}

@@ -21,11 +21,10 @@ export default function Home() {
       <Gift_Hero />
       <Footer />
 
-      {/* Chatbot Image */}
       <div className="fixed bottom-0 right-5">
         <a href="https://pest-and-disease-detection-wg3phtpsf7kfc2senafbps.streamlit.app/" target="_blank" rel="noopener noreferrer">
           <img
-            src={chatbot} // Replace with your actual image path
+            src={chatbot}
             alt="Chatbot"
             className="w-[150px] h-[120px] rounded-full shadow-lg cursor-pointer"
           />

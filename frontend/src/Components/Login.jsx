@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import AuthContext from "../context/AuthContext"; // Import AuthContext
+import AuthContext from "../context/AuthContext"; 
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import back from "../images/baakibackground.png"; // Add your background image
+import back from "../images/baakibackground.png"; 
 
 export default function Login() {
-  const { login, loading, error } = useContext(AuthContext); // Destructure login, loading, and error from context
+  const { login, loading, error } = useContext(AuthContext); 
   const [user, setUser] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
@@ -13,7 +13,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(user.email, user.password); // Use the login function from context
+    await login(user.email, user.password); 
   };
 
   return (
@@ -48,12 +48,12 @@ export default function Login() {
           <button
             type="submit"
             className="w-full bg-[#e8872a] p-3 rounded-xl text-white font-bold text-2xl hover:bg-[#d0761e] hover:shadow-lg transform transition-all duration-300 hover:scale-105"
-            disabled={loading} // Disable button when loading
+            disabled={loading} 
           >
-            {loading ? "Loading..." : "Login"} {/* Show loading text */}
+            {loading ? "Loading..." : "Login"}
           </button>
         </form>
-        {error && <p className="text-red-500 text-center mt-4">{error}</p>} {/* Display error if any */}
+        {error && <p className="text-red-500 text-center mt-4">{error}</p>} 
         <p className="text-center mt-4 text-xl">
           New here? <a href="/register" className="text-[#e8872a] font-bold">Register now</a>
         </p>
